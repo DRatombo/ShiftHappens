@@ -46,5 +46,7 @@ Progress Insights & Analytics: Provide more detailed insights into spending patt
 
 Community and Social Features: Create a community feature where users can share their savings goals and achievements, and motivate each other
 
+Mobile App: Transform the web application into a mobile app for easier access and real-time tracking.
+
 
 ```
