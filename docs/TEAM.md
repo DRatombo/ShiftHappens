@@ -12,7 +12,7 @@
 ## 👥 Members
 | Name     | Role                | Institution           | Discord Handle | Email |
 |----------|---------------------|-----------------------| -------------------|-------------|
-| **Duduzile**   | Backend Developer   | University of Cape Town | name1 | <email1@gmail.com> |
+| **Duduzile Ratombo**   | Backend Developer   | University of KwaZulu Natal | duduzile.rt | <ratombodm@gmail.com> |
 | **Name 2**   | Frontend Developer  | University of the Witwatersrand | name2 | <email2@gmail.com> |
 | **Name 3**   | Designer            | University of Johannesburg | name3 | <email3@gmail.com> |
 | **Name 4**   | Q.A Tester          | University of the Western Cape | name4 | <email4@gmail.com> |
