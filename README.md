@@ -6,29 +6,43 @@ Welcome to the official **Hackathon Submission Template** for the **South Africa
 
 ## 📂 Repository Structure
 ```
-├── assets/
-│   └── README.md
-├── demo/
-│   ├── OVERVIEW.md
-│   └── README.md
-├── docs/
-│   ├── ACKNOWLEDGEMENTS.md
-│   ├── SETUP.md
-│   ├── TEAM.md
-│   └── USAGE.md
-├── scripts/
-│   └── README.md
-├── src/
-│   └── README.md
-├── vendor/
-│   └── README.md
-├── .dockerignore
-├── .editorconfig
-├── .gitattributes
-├── .gitignore
-├── Dockerfile
-├── LICENSE
-└── README.md
+Budget Buddy/
+├── 📄 Configuration Files
+│   ├── package.json              # Dependencies and scripts
+│   ├── package-lock.json        # Dependency lock file
+│   ├── tailwind.config.js       # Tailwind CSS configuration
+│   └── README.md                # Project documentation
+│
+├── 🚀 Deployment Files
+│   ├── deploy.bat               # Windows deployment script
+│   ├── deploy.sh                # Unix/Linux deployment script
+│   └── DEPLOYMENT_GUIDE.md      # Deployment instructions
+│
+├── 🖥️ Server Files
+│   └── server.js                # Express server with API routes
+│
+├── 📁 Source Files
+│   └── src/
+│       └── input.css            # Tailwind CSS input file
+│
+└── 📁 Public Assets
+    └── public/
+        ├── 🏠 Pages
+        │   ├── homepage.html         # Landing page
+        │   ├── signup.html           # User registration/login
+        │   ├── income.html           # Income setup page
+        │   ├── savings-goals.html    # Basic savings goals
+        │   ├── savings-goals-enhanced.html # Advanced multi-goal setup
+        │   ├── expenses.html         # Expense tracking
+        │   ├── dashboard.html        # Main financial dashboard
+        │   ├── rewards-center.html   # XP and rewards management
+        │   └── profile.html          # User profile management
+        │
+        ├── 🎨 Styling
+        │   └── styles.css            # Compiled Tailwind CSS
+        │
+        └── 📜 Scripts
+            └── script.js             # Legacy single-page script
 ```
 ---
 

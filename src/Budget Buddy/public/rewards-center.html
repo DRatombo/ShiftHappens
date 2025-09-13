@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards Center - Budget Buddy</title>
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen navbar-fixed">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-brand">
+                <div class="text-2xl">💰</div>
+                Budget Buddy
+            </a>
+            <div class="navbar-nav">
+                <a href="/dashboard" class="navbar-link">Dashboard</a>
+                <a href="/income" class="navbar-link">Income</a>
+                <a href="/savings-goals" class="navbar-link">Savings Goals</a>
+                <a href="/expenses" class="navbar-link">Expenses</a>
+                <a href="/rewards-center" class="navbar-link active">Rewards</a>
+                <a href="/profile" class="navbar-link">Profile</a>
+                <button id="logoutBtn" class="navbar-link">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-16">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🎁</div>
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Rewards Center</h1>
+            <p class="text-lg text-gray-600">Convert your XP into real rewards and investment opportunities</p>
+        </div>
+
+        <!-- XP Status -->
+        <div class="card mb-8">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your XP Status</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <div class="text-4xl font-bold text-primary-600" id="currentXP">0</div>
+                        <div class="text-sm text-gray-600">Current XP</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-accent-500" id="currentLevel">1</div>
+                        <div class="text-sm text-gray-600">Current Level</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-green-600" id="availableVouchers">0</div>
+                        <div class="text-sm text-gray-600">Available Vouchers</div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="progress-bar-enhanced">
+                        <div class="progress-fill-enhanced" id="xpProgressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-2" id="xpProgressText">0 / 100 XP to next level</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rewards Options -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Voucher Rewards -->
+            <div class="card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">🎁 Voucher Rewards</h3>
+                <p class="text-gray-600 mb-6">Convert your XP into vouchers for popular retailers and services</p>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div>
+                            <div class="font-semibold">R50 Gift Card</div>
+                            <div class="text-sm text-gray-600">Any major retailer</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-primary-600">100 XP</div>
+                            <button class="btn-primary text-sm px-4 py-2 mt-2" onclick="convertToVoucher(100, 50)">
+                                Convert
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div>
+                            <div class="font-semibold">R100 Gift Card</div>
+                            <div class="text-sm text-gray-600">Any major retailer</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-primary-600">200 XP</div>
+                            <button class="btn-primary text-sm px-4 py-2 mt-2" onclick="convertToVoucher(200, 100)">
+                                Convert
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div>
+                            <div class="font-semibold">R250 Gift Card</div>
+                            <div class="text-sm text-gray-600">Any major retailer</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-primary-600">500 XP</div>
+                            <button class="btn-primary text-sm px-4 py-2 mt-2" onclick="convertToVoucher(500, 250)">
+                                Convert
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Voucher -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h4 class="font-semibold mb-3">Custom Voucher Amount</h4>
+                    <div class="flex space-x-2">
+                        <input type="number" id="customVoucherAmount" class="input-field flex-1" placeholder="Amount (ZAR)" min="10" step="10">
+                        <button class="btn-secondary" onclick="convertCustomVoucher()">Convert</button>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-2">
+                        Rate: 2 XP per R1 (minimum 20 XP)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Opportunities -->
+            <div class="card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">📈 Investment Opportunities</h3>
+                <p class="text-gray-600 mb-6">Use your XP to invest in shares, ETFs, and micro-investments</p>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="investment-option" onclick="selectInvestment('jse-top40')">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold">JSE Top 40 ETF</div>
+                                <div class="text-sm text-gray-600">Diversified South African market exposure</div>
+                                <div class="text-sm text-green-600">+12.5% YTD</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-primary-600">500 XP</div>
+                                <div class="text-sm text-gray-600">per R100 investment</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="investment-option" onclick="selectInvestment('sasol')">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold">Sasol Limited</div>
+                                <div class="text-sm text-gray-600">Energy and chemicals company</div>
+                                <div class="text-sm text-green-600">+8.3% YTD</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-primary-600">300 XP</div>
+                                <div class="text-sm text-gray-600">per R100 investment</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="investment-option" onclick="selectInvestment('shoprite')">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold">Shoprite Holdings</div>
+                                <div class="text-sm text-gray-600">Retail and supermarket chain</div>
+                                <div class="text-sm text-green-600">+15.2% YTD</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-primary-600">400 XP</div>
+                                <div class="text-sm text-gray-600">per R100 investment</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="investment-option" onclick="selectInvestment('micro-investment')">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold">Micro-Investment Fund</div>
+                                <div class="text-sm text-gray-600">Low-risk diversified portfolio</div>
+                                <div class="text-sm text-green-600">+6.8% YTD</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-primary-600">200 XP</div>
+                                <div class="text-sm text-gray-600">per R100 investment</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Investment -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h4 class="font-semibold mb-3">Custom Investment Amount</h4>
+                    <div class="space-y-3">
+                        <select id="investmentType" class="input-field">
+                            <option value="jse-top40">JSE Top 40 ETF</option>
+                            <option value="sasol">Sasol Limited</option>
+                            <option value="shoprite">Shoprite Holdings</option>
+                            <option value="micro-investment">Micro-Investment Fund</option>
+                        </select>
+                        <div class="flex space-x-2">
+                            <input type="number" id="customInvestmentAmount" class="input-field flex-1" placeholder="Amount (ZAR)" min="100" step="50">
+                            <button class="btn-secondary" onclick="convertCustomInvestment()">Invest</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Portfolio -->
+        <div class="card mt-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">💼 Your Investment Portfolio</h3>
+            <div id="portfolioContent">
+                <div class="text-center text-gray-500 py-8">
+                    <div class="text-4xl mb-4">📊</div>
+                    <p>No investments yet. Start investing your XP to grow your wealth!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voucher History -->
+        <div class="card mt-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🎫 Voucher History</h3>
+            <div id="voucherHistory">
+                <div class="text-center text-gray-500 py-8">
+                    <div class="text-4xl mb-4">🎁</div>
+                    <p>No vouchers redeemed yet. Start earning XP to get rewards!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        class RewardsCenterManager {
+            constructor() {
+                this.currentXP = 0;
+                this.currentLevel = 1;
+                this.selectedInvestment = null;
+                this.portfolio = [];
+                this.vouchers = [];
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.checkAuthStatus();
+                this.loadUserData();
+            }
+
+            setupEventListeners() {
+                document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+            }
+
+            async loadUserData() {
+                try {
+                    const response = await fetch('/api/budget');
+                    const data = await response.json();
+                    
+                    if (data.totalXP) {
+                        this.currentXP = data.totalXP;
+                        this.updateXPDisplay();
+                    }
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                }
+            }
+
+            updateXPDisplay() {
+                this.currentLevel = Math.floor(this.currentXP / 100) + 1;
+                const progressInLevel = this.currentXP % 100;
+                const progressPercentage = (progressInLevel / 100) * 100;
+                const availableVouchers = Math.floor(this.currentXP / 20);
+
+                document.getElementById('currentXP').textContent = this.currentXP;
+                document.getElementById('currentLevel').textContent = this.currentLevel;
+                document.getElementById('availableVouchers').textContent = availableVouchers;
+                document.getElementById('xpProgressBar').style.width = `${progressPercentage}%`;
+                document.getElementById('xpProgressText').textContent = `${progressInLevel} / 100 XP to next level`;
+            }
+
+            async checkAuthStatus() {
+                try {
+                    const response = await fetch('/api/auth/me');
+                    const data = await response.json();
+                    
+                    if (!data.user) {
+                        window.location.href = '/signup';
+                    }
+                } catch (error) {
+                    console.error('Error checking auth status:', error);
+                    window.location.href = '/signup';
+                }
+            }
+
+            async logout() {
+                try {
+                    await fetch('/api/auth/logout', { method: 'POST' });
+                    window.location.href = '/';
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
+            }
+
+            showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(errorDiv);
+                }, 5000);
+            }
+
+            showSuccess(message) {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                successDiv.textContent = message;
+                document.body.appendChild(successDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(successDiv);
+                }, 5000);
+            }
+        }
+
+        // Global functions for button clicks
+        function selectInvestment(type) {
+            // Remove previous selection
+            document.querySelectorAll('.investment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            event.currentTarget.classList.add('selected');
+            window.rewardsManager.selectedInvestment = type;
+        }
+
+        function convertToVoucher(xpCost, amount) {
+            if (window.rewardsManager.currentXP >= xpCost) {
+                window.rewardsManager.currentXP -= xpCost;
+                window.rewardsManager.vouchers.push({
+                    amount: amount,
+                    date: new Date().toISOString(),
+                    xpCost: xpCost
+                });
+                window.rewardsManager.updateXPDisplay();
+                window.rewardsManager.showSuccess(`Successfully converted ${xpCost} XP to R${amount} voucher!`);
+            } else {
+                window.rewardsManager.showError('Insufficient XP for this conversion');
+            }
+        }
+
+        function convertCustomVoucher() {
+            const amount = parseFloat(document.getElementById('customVoucherAmount').value);
+            if (!amount || amount < 10) {
+                window.rewardsManager.showError('Please enter a valid amount (minimum R10)');
+                return;
+            }
+            
+            const xpCost = Math.ceil(amount * 2); // 2 XP per R1
+            if (window.rewardsManager.currentXP >= xpCost) {
+                convertToVoucher(xpCost, amount);
+                document.getElementById('customVoucherAmount').value = '';
+            } else {
+                window.rewardsManager.showError('Insufficient XP for this conversion');
+            }
+        }
+
+        function convertCustomInvestment() {
+            const type = document.getElementById('investmentType').value;
+            const amount = parseFloat(document.getElementById('customInvestmentAmount').value);
+            
+            if (!amount || amount < 100) {
+                window.rewardsManager.showError('Please enter a valid amount (minimum R100)');
+                return;
+            }
+            
+            const xpCost = Math.ceil(amount * 2); // 2 XP per R1
+            if (window.rewardsManager.currentXP >= xpCost) {
+                window.rewardsManager.currentXP -= xpCost;
+                window.rewardsManager.portfolio.push({
+                    type: type,
+                    amount: amount,
+                    date: new Date().toISOString(),
+                    xpCost: xpCost
+                });
+                window.rewardsManager.updateXPDisplay();
+                window.rewardsManager.showSuccess(`Successfully invested ${xpCost} XP in ${type} for R${amount}!`);
+                document.getElementById('customInvestmentAmount').value = '';
+            } else {
+                window.rewardsManager.showError('Insufficient XP for this investment');
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.rewardsManager = new RewardsCenterManager();
+        });
+    </script>
+</body>
+</html>

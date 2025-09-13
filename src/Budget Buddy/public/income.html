@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Setup - Budget Buddy</title>
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen navbar-fixed">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-brand">
+                <div class="text-2xl">💰</div>
+                Budget Buddy
+            </a>
+            <div class="navbar-nav">
+                <a href="/dashboard" class="navbar-link">Dashboard</a>
+                <a href="/income" class="navbar-link active">Income</a>
+                <a href="/savings-goals" class="navbar-link">Savings Goals</a>
+                <a href="/expenses" class="navbar-link">Expenses</a>
+                <a href="/profile" class="navbar-link">Profile</a>
+                <button id="logoutBtn" class="navbar-link">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b border-gray-200" style="margin-top: 4rem;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="text-3xl">💰</div>
+                        <h1 class="text-2xl font-bold text-gradient">Budget Buddy</h1>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userName" class="text-gray-600"></span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="step-indicator active">1</div>
+                <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                <div class="step-indicator pending">2</div>
+                <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                <div class="step-indicator pending">3</div>
+                <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                <div class="step-indicator pending">4</div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span class="font-medium">Income</span>
+                <span>Savings Goals</span>
+                <span>Expenses</span>
+                <span>Dashboard</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto px-4 py-16">
+        <div class="card">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">💼</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Let's Start with Your Income</h2>
+                <p class="text-lg text-gray-600">
+                    First, we need to know your monthly income to help you manage your budget effectively. 
+                    This will be the foundation for calculating your savings and expenses.
+                </p>
+            </div>
+
+            <form id="incomeForm" class="space-y-8">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Monthly Income Details</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="primaryIncome" class="block text-sm font-medium text-gray-700 mb-2">
+                                Primary Income (Salary/Wages) - ZAR
+                            </label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                            <input type="number" id="primaryIncome" name="primaryIncome" 
+                                   class="input-field pl-8" placeholder="0" min="0" step="0.01" required>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">Your main source of income (salary, wages, etc.)</p>
+                        </div>
+
+                        <div>
+                            <label for="secondaryIncome" class="block text-sm font-medium text-gray-700 mb-2">
+                                Secondary Income - ZAR (Optional)
+                            </label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                            <input type="number" id="secondaryIncome" name="secondaryIncome" 
+                                   class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">Freelance work, side business, investments, etc.</p>
+                        </div>
+
+                        <div>
+                            <label for="otherIncome" class="block text-sm font-medium text-gray-700 mb-2">
+                                Other Income - ZAR (Optional)
+                            </label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                            <input type="number" id="otherIncome" name="otherIncome" 
+                                   class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">Allowances, benefits, or any other income sources</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Income Summary -->
+                <div class="bg-primary-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Total Monthly Income</h3>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary-600" id="totalIncome">R 0</div>
+                        <p class="text-gray-600 mt-2">This will be used to calculate your budget allocations</p>
+                    </div>
+                </div>
+
+                <!-- Income Frequency -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">How often do you receive your income?</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="incomeFrequency" value="monthly" class="mr-3" checked>
+                            <div>
+                                <div class="font-medium">Monthly</div>
+                                <div class="text-sm text-gray-500">Once per month</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="incomeFrequency" value="biweekly" class="mr-3">
+                            <div>
+                                <div class="font-medium">Bi-weekly</div>
+                                <div class="text-sm text-gray-500">Every 2 weeks</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="incomeFrequency" value="weekly" class="mr-3">
+                            <div>
+                                <div class="font-medium">Weekly</div>
+                                <div class="text-sm text-gray-500">Every week</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="incomeFrequency" value="irregular" class="mr-3">
+                            <div>
+                                <div class="font-medium">Irregular</div>
+                                <div class="text-sm text-gray-500">Variable schedule</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <a href="/dashboard" class="btn-secondary">Skip for Now</a>
+                    <button type="submit" class="btn-primary">
+                        Continue to Savings Goals →
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        class IncomeManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.checkAuthStatus();
+                this.updateTotalIncome();
+            }
+
+            setupEventListeners() {
+                // Form submission
+                document.getElementById('incomeForm').addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Real-time income calculation
+                document.getElementById('primaryIncome').addEventListener('input', () => this.updateTotalIncome());
+                document.getElementById('secondaryIncome').addEventListener('input', () => this.updateTotalIncome());
+                document.getElementById('otherIncome').addEventListener('input', () => this.updateTotalIncome());
+                
+                // Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+            }
+
+            updateTotalIncome() {
+                const primary = parseFloat(document.getElementById('primaryIncome').value) || 0;
+                const secondary = parseFloat(document.getElementById('secondaryIncome').value) || 0;
+                const other = parseFloat(document.getElementById('otherIncome').value) || 0;
+                
+                const total = primary + secondary + other;
+                document.getElementById('totalIncome').textContent = `R ${total.toLocaleString()}`;
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const incomeData = {
+                    primaryIncome: parseFloat(formData.get('primaryIncome')) || 0,
+                    secondaryIncome: parseFloat(formData.get('secondaryIncome')) || 0,
+                    otherIncome: parseFloat(formData.get('otherIncome')) || 0,
+                    incomeFrequency: formData.get('incomeFrequency')
+                };
+                
+                if (incomeData.primaryIncome <= 0) {
+                    this.showError('Please enter a valid primary income amount');
+                    return;
+                }
+                
+                try {
+                    // Store income data in session/localStorage for now
+                    sessionStorage.setItem('incomeData', JSON.stringify(incomeData));
+                    
+                    // Redirect to savings goals page
+                    window.location.href = '/savings-goals';
+                } catch (error) {
+                    console.error('Error saving income data:', error);
+                    this.showError('Failed to save income data. Please try again.');
+                }
+            }
+
+            async checkAuthStatus() {
+                try {
+                    const response = await fetch('/api/auth/me');
+                    const data = await response.json();
+                    
+                    if (data.user) {
+                        document.getElementById('userName').textContent = `Welcome, ${data.user.name}`;
+                    } else {
+                        window.location.href = '/signup';
+                    }
+                } catch (error) {
+                    console.error('Error checking auth status:', error);
+                    window.location.href = '/signup';
+                }
+            }
+
+            async logout() {
+                try {
+                    await fetch('/api/auth/logout', { method: 'POST' });
+                    window.location.href = '/';
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
+            }
+
+            showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(errorDiv);
+                }, 5000);
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new IncomeManager();
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Setup - Budget Buddy</title>
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen navbar-fixed">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-brand">
+                <div class="text-2xl">💰</div>
+                Budget Buddy
+            </a>
+            <div class="navbar-nav">
+                <a href="/dashboard" class="navbar-link">Dashboard</a>
+                <a href="/income" class="navbar-link">Income</a>
+                <a href="/savings-goals" class="navbar-link">Savings Goals</a>
+                <a href="/expenses" class="navbar-link active">Expenses</a>
+                <a href="/rewards-center" class="navbar-link">Rewards</a>
+                <a href="/profile" class="navbar-link">Profile</a>
+                <button id="logoutBtn" class="navbar-link">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b border-gray-200" style="margin-top: 4rem;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="text-3xl">💰</div>
+                        <h1 class="text-2xl font-bold text-gradient">Budget Buddy</h1>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userName" class="text-gray-600"></span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="step-indicator completed">1</div>
+                <div class="flex-1 h-1 bg-green-500 mx-2"></div>
+                <div class="step-indicator completed">2</div>
+                <div class="flex-1 h-1 bg-green-500 mx-2"></div>
+                <div class="step-indicator active">3</div>
+                <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                <div class="step-indicator pending">4</div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span class="font-medium text-green-600">Income</span>
+                <span class="font-medium text-green-600">Savings Goals</span>
+                <span class="font-medium">Expenses</span>
+                <span>Dashboard</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-16">
+        <div class="card">
+                <div class="text-center mb-8">
+                <div class="text-6xl mb-4">💳</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Track Your Expenses</h2>
+                <p class="text-lg text-gray-600" id="expensesDescription">
+                    Now, let's move on to your expenses. We'll need to know your spending in a few essential categories 
+                    to help you stay on track with your savings goals.
+                </p>
+                <div id="directNavigationMessage" class="hidden mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="text-blue-800">
+                        <strong>Note:</strong> You can edit your expenses here. If you haven't set up your income and savings goals yet, 
+                        <a href="/income" class="text-blue-600 hover:underline">start with income setup</a> or 
+                        <a href="/savings-goals" class="text-blue-600 hover:underline">set your savings goals</a>.
+                    </p>
+                </div>
+            </div>
+
+            <form id="expensesForm" class="space-y-8">
+                <!-- Essential Expenses -->
+                <div class="bg-red-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl mr-3">🏠</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Essential Expenses</h3>
+                            <p class="text-sm text-gray-600">Non-negotiable costs for daily living</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="rent" class="block text-sm font-medium text-gray-700 mb-2">Rent/Mortgage - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="rent" name="rent" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="utilities" class="block text-sm font-medium text-gray-700 mb-2">Utilities - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="utilities" name="utilities" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="groceries" class="block text-sm font-medium text-gray-700 mb-2">Groceries - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="groceries" name="groceries" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="transport" class="block text-sm font-medium text-gray-700 mb-2">Transport - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="transport" name="transport" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="insurance" class="block text-sm font-medium text-gray-700 mb-2">Insurance - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="insurance" name="insurance" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="otherEssential" class="block text-sm font-medium text-gray-700 mb-2">Other Essential - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="otherEssential" name="otherEssential" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="text-sm text-gray-600">Total Essential Expenses:</div>
+                        <div class="text-2xl font-bold text-red-600" id="totalEssential">R 0</div>
+                    </div>
+                </div>
+
+                <!-- Entertainment Expenses -->
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl mr-3">🎬</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Entertainment Expenses</h3>
+                            <p class="text-sm text-gray-600">Fun activities and leisure spending</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="diningOut" class="block text-sm font-medium text-gray-700 mb-2">Dining Out - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="diningOut" name="diningOut" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="streaming" class="block text-sm font-medium text-gray-700 mb-2">Streaming Services - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="streaming" name="streaming" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="entertainment" class="block text-sm font-medium text-gray-700 mb-2">Movies/Events - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="entertainment" name="entertainment" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="hobbies" class="block text-sm font-medium text-gray-700 mb-2">Hobbies - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="hobbies" name="hobbies" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="text-sm text-gray-600">Total Entertainment Expenses:</div>
+                        <div class="text-2xl font-bold text-blue-600" id="totalEntertainment">R 0</div>
+                    </div>
+                </div>
+
+                <!-- Miscellaneous Expenses -->
+                <div class="bg-green-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-3xl mr-3">🛍️</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Miscellaneous Expenses</h3>
+                            <p class="text-sm text-gray-600">Everything else that doesn't fit the other categories</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="shopping" class="block text-sm font-medium text-gray-700 mb-2">Shopping - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="shopping" name="shopping" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gifts" class="block text-sm font-medium text-gray-700 mb-2">Gifts - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="gifts" name="gifts" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="healthcare" class="block text-sm font-medium text-gray-700 mb-2">Healthcare - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="healthcare" name="healthcare" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="otherMisc" class="block text-sm font-medium text-gray-700 mb-2">Other - ZAR</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="otherMisc" name="otherMisc" class="input-field pl-8" placeholder="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="text-sm text-gray-600">Total Miscellaneous Expenses:</div>
+                        <div class="text-2xl font-bold text-green-600" id="totalMisc">R 0</div>
+                    </div>
+                </div>
+
+                <!-- Budget Summary -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Your Budget Summary</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Total Income:</span>
+                                <span class="font-semibold" id="summaryIncome">R 0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Essential Expenses:</span>
+                                <span class="font-semibold text-red-600" id="summaryEssential">R 0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Entertainment:</span>
+                                <span class="font-semibold text-blue-600" id="summaryEntertainment">R 0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Miscellaneous:</span>
+                                <span class="font-semibold text-green-600" id="summaryMisc">R 0</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Total Expenses:</span>
+                                <span class="font-semibold" id="summaryTotalExpenses">R 0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Monthly Savings:</span>
+                                <span class="font-semibold" id="summarySavings">R 0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Savings Rate:</span>
+                                <span class="font-semibold" id="summarySavingsRate">0%</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-600">Budget Status:</span>
+                                <span class="font-semibold" id="budgetStatus">Balanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <a href="/savings-goals" class="btn-secondary">← Back to Savings Goals</a>
+                    <button type="submit" class="btn-primary" id="submitButton">
+                        Complete Setup →
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        class ExpensesManager {
+            constructor() {
+                this.incomeData = null;
+                this.savingsData = null;
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.checkAuthStatus();
+                this.loadUserData();
+            }
+
+            setupEventListeners() {
+                // Form submission
+                document.getElementById('expensesForm').addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Real-time calculations
+                const expenseInputs = document.querySelectorAll('input[type="number"]');
+                expenseInputs.forEach(input => {
+                    input.addEventListener('input', () => this.updateCalculations());
+                });
+                
+                // Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+            }
+
+            async loadUserData() {
+                console.log('Loading user data...');
+                
+                // First check if user has existing budget data
+                try {
+                    const response = await fetch('/api/budget');
+                    const data = await response.json();
+                    
+                    if (data.budgets && data.budgets.length > 0) {
+                        console.log('Found existing budget data:', data.budgets.length, 'budgets');
+                        // User has existing budget, load it for editing
+                        const latestBudget = data.budgets[data.budgets.length - 1];
+                        this.incomeData = latestBudget.income;
+                        this.savingsData = latestBudget.savings;
+                        this.loadExistingExpenses(latestBudget.expenses);
+                        this.updateCalculations();
+                        
+                        // Update button text for editing mode
+                        document.getElementById('submitButton').textContent = 'Update Budget →';
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error loading existing budget:', error);
+                }
+                
+                // If no existing budget, check session storage for setup flow
+                const incomeData = sessionStorage.getItem('incomeData');
+                const savingsData = sessionStorage.getItem('savingsData');
+                const savingsGoals = sessionStorage.getItem('savingsGoals');
+                
+                console.log('Session storage data:', {
+                    incomeData: !!incomeData,
+                    savingsData: !!savingsData,
+                    savingsGoals: !!savingsGoals,
+                    referrer: document.referrer
+                });
+                
+                if (incomeData) {
+                    this.incomeData = JSON.parse(incomeData);
+                } else {
+                    // If no income data and no existing budget, redirect to income
+                    // But only if this is part of the setup flow
+                    if (!this.isDirectNavigation()) {
+                        window.location.href = '/income';
+                        return;
+                    }
+                    // For direct navigation, show empty form
+                    this.incomeData = { primaryIncome: 0, secondaryIncome: 0, otherIncome: 0 };
+                }
+                
+                // Check both savingsData and savingsGoals (compatibility with both pages)
+                if (savingsData) {
+                    this.savingsData = JSON.parse(savingsData);
+                } else if (savingsGoals) {
+                    // Convert savingsGoals array to savingsData format
+                    const goals = JSON.parse(savingsGoals);
+                    if (goals.length > 0) {
+                        const primaryGoal = goals[0]; // Use first goal as primary
+                        this.savingsData = {
+                            category: primaryGoal.name || 'General Savings',
+                            targetAmount: primaryGoal.targetAmount || 0,
+                            duration: primaryGoal.duration || 12,
+                            monthlySavings: primaryGoal.monthlySavings || 0
+                        };
+                    } else {
+                        this.savingsData = { category: 'General Savings', targetAmount: 0, duration: 12, monthlySavings: 0 };
+                    }
+                } else {
+                    // If no savings data and no existing budget, redirect to savings goals
+                    // But only if this is part of the setup flow
+                    if (!this.isDirectNavigation()) {
+                        window.location.href = '/savings-goals';
+                        return;
+                    }
+                    // For direct navigation, show empty form
+                    this.savingsData = { category: 'General Savings', targetAmount: 0, duration: 12, monthlySavings: 0 };
+                }
+                
+                this.updateCalculations();
+                
+                // Show direct navigation message if applicable
+                if (this.isDirectNavigation() && (!incomeData || (!savingsData && !savingsGoals))) {
+                    document.getElementById('directNavigationMessage').classList.remove('hidden');
+                }
+            }
+
+            isDirectNavigation() {
+                // Check if user came directly to expenses page (not from setup flow)
+                // by checking if there's a referrer or if they're coming from another page
+                const referrer = document.referrer;
+                const currentPath = window.location.pathname;
+                
+                // If referrer is empty or from a different domain, it's likely direct navigation
+                if (!referrer || referrer.includes('localhost:3000') === false) {
+                    return true;
+                }
+                
+                // If coming from dashboard or other pages (not income/savings), it's direct navigation
+                if (referrer.includes('/dashboard') || referrer.includes('/profile') || referrer.includes('/rewards')) {
+                    return true;
+                }
+                
+                // If coming from savings-goals page, it's part of setup flow (not direct navigation)
+                if (referrer.includes('/savings-goals')) {
+                    return false;
+                }
+                
+                // If coming from income page, it's part of setup flow (not direct navigation)
+                if (referrer.includes('/income')) {
+                    return false;
+                }
+                
+                return false;
+            }
+
+            loadExistingExpenses(expenses) {
+                // Load essential expenses
+                if (expenses.essential) {
+                    document.getElementById('rent').value = expenses.essential.rent || 0;
+                    document.getElementById('utilities').value = expenses.essential.utilities || 0;
+                    document.getElementById('groceries').value = expenses.essential.groceries || 0;
+                    document.getElementById('transport').value = expenses.essential.transport || 0;
+                    document.getElementById('insurance').value = expenses.essential.insurance || 0;
+                    document.getElementById('otherEssential').value = expenses.essential.other || 0;
+                }
+                
+                // Load entertainment expenses
+                if (expenses.entertainment) {
+                    document.getElementById('diningOut').value = expenses.entertainment.diningOut || 0;
+                    document.getElementById('streaming').value = expenses.entertainment.streaming || 0;
+                    document.getElementById('entertainment').value = expenses.entertainment.entertainment || 0;
+                    document.getElementById('hobbies').value = expenses.entertainment.hobbies || 0;
+                }
+                
+                // Load miscellaneous expenses
+                if (expenses.miscellaneous) {
+                    document.getElementById('shopping').value = expenses.miscellaneous.shopping || 0;
+                    document.getElementById('gifts').value = expenses.miscellaneous.gifts || 0;
+                    document.getElementById('healthcare').value = expenses.miscellaneous.healthcare || 0;
+                    document.getElementById('otherMisc').value = expenses.miscellaneous.other || 0;
+                }
+            }
+
+            updateCalculations() {
+                // Calculate essential expenses
+                const essentialInputs = ['rent', 'utilities', 'groceries', 'transport', 'insurance', 'otherEssential'];
+                const totalEssential = essentialInputs.reduce((sum, id) => {
+                    return sum + (parseFloat(document.getElementById(id).value) || 0);
+                }, 0);
+                document.getElementById('totalEssential').textContent = `R ${totalEssential.toLocaleString()}`;
+                
+                // Calculate entertainment expenses
+                const entertainmentInputs = ['diningOut', 'streaming', 'entertainment', 'hobbies'];
+                const totalEntertainment = entertainmentInputs.reduce((sum, id) => {
+                    return sum + (parseFloat(document.getElementById(id).value) || 0);
+                }, 0);
+                document.getElementById('totalEntertainment').textContent = `R ${totalEntertainment.toLocaleString()}`;
+                
+                // Calculate miscellaneous expenses
+                const miscInputs = ['shopping', 'gifts', 'healthcare', 'otherMisc'];
+                const totalMisc = miscInputs.reduce((sum, id) => {
+                    return sum + (parseFloat(document.getElementById(id).value) || 0);
+                }, 0);
+                document.getElementById('totalMisc').textContent = `R ${totalMisc.toLocaleString()}`;
+                
+                // Update summary
+                this.updateSummary(totalEssential, totalEntertainment, totalMisc);
+            }
+
+            updateSummary(essential, entertainment, misc) {
+                const totalIncome = this.incomeData.primaryIncome + this.incomeData.secondaryIncome + this.incomeData.otherIncome;
+                const totalExpenses = essential + entertainment + misc;
+                const savings = totalIncome - totalExpenses;
+                const savingsRate = totalIncome > 0 ? (savings / totalIncome) * 100 : 0;
+                
+                document.getElementById('summaryIncome').textContent = `R ${totalIncome.toLocaleString()}`;
+                document.getElementById('summaryEssential').textContent = `R ${essential.toLocaleString()}`;
+                document.getElementById('summaryEntertainment').textContent = `R ${entertainment.toLocaleString()}`;
+                document.getElementById('summaryMisc').textContent = `R ${misc.toLocaleString()}`;
+                document.getElementById('summaryTotalExpenses').textContent = `R ${totalExpenses.toLocaleString()}`;
+                document.getElementById('summarySavings').textContent = `R ${savings.toLocaleString()}`;
+                document.getElementById('summarySavingsRate').textContent = `${savingsRate.toFixed(1)}%`;
+                
+                // Update savings color and status
+                const savingsElement = document.getElementById('summarySavings');
+                const statusElement = document.getElementById('budgetStatus');
+                
+                if (savings < 0) {
+                    savingsElement.className = 'font-semibold text-red-600';
+                    statusElement.textContent = 'Over Budget';
+                    statusElement.className = 'font-semibold text-red-600';
+                } else if (savings > 0) {
+                    savingsElement.className = 'font-semibold text-green-600';
+                    statusElement.textContent = 'On Track';
+                    statusElement.className = 'font-semibold text-green-600';
+                } else {
+                    savingsElement.className = 'font-semibold text-gray-600';
+                    statusElement.textContent = 'Balanced';
+                    statusElement.className = 'font-semibold text-gray-600';
+                }
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const expensesData = {
+                    essential: {
+                        rent: parseFloat(formData.get('rent')) || 0,
+                        utilities: parseFloat(formData.get('utilities')) || 0,
+                        groceries: parseFloat(formData.get('groceries')) || 0,
+                        transport: parseFloat(formData.get('transport')) || 0,
+                        insurance: parseFloat(formData.get('insurance')) || 0,
+                        other: parseFloat(formData.get('otherEssential')) || 0
+                    },
+                    entertainment: {
+                        diningOut: parseFloat(formData.get('diningOut')) || 0,
+                        streaming: parseFloat(formData.get('streaming')) || 0,
+                        entertainment: parseFloat(formData.get('entertainment')) || 0,
+                        hobbies: parseFloat(formData.get('hobbies')) || 0
+                    },
+                    miscellaneous: {
+                        shopping: parseFloat(formData.get('shopping')) || 0,
+                        gifts: parseFloat(formData.get('gifts')) || 0,
+                        healthcare: parseFloat(formData.get('healthcare')) || 0,
+                        other: parseFloat(formData.get('otherMisc')) || 0
+                    }
+                };
+                
+                // Calculate totals
+                const totalEssential = Object.values(expensesData.essential).reduce((sum, val) => sum + val, 0);
+                const totalEntertainment = Object.values(expensesData.entertainment).reduce((sum, val) => sum + val, 0);
+                const totalMisc = Object.values(expensesData.miscellaneous).reduce((sum, val) => sum + val, 0);
+                
+                const budgetData = {
+                    income: this.incomeData,
+                    savings: this.savingsData,
+                    expenses: expensesData,
+                    totals: {
+                        essential: totalEssential,
+                        entertainment: totalEntertainment,
+                        miscellaneous: totalMisc,
+                        total: totalEssential + totalEntertainment + totalMisc
+                    }
+                };
+                
+                try {
+                    // Save complete budget to server
+                    const response = await fetch('/api/budget', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(budgetData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Clear session storage if this was part of the setup flow
+                        sessionStorage.removeItem('incomeData');
+                        sessionStorage.removeItem('savingsData');
+                        sessionStorage.removeItem('savingsGoals'); // Clear both formats
+                        
+                        // Show success message and redirect to dashboard
+                        this.showSuccess('Budget updated successfully!');
+                        setTimeout(() => {
+                            window.location.href = '/dashboard';
+                        }, 1500);
+                    } else {
+                        this.showError('Failed to save budget. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error saving budget:', error);
+                    this.showError('Network error. Please try again.');
+                }
+            }
+
+            async checkAuthStatus() {
+                try {
+                    const response = await fetch('/api/auth/me');
+                    const data = await response.json();
+                    
+                    if (data.user) {
+                        document.getElementById('userName').textContent = `Welcome, ${data.user.name}`;
+                    } else {
+                        window.location.href = '/signup';
+                    }
+                } catch (error) {
+                    console.error('Error checking auth status:', error);
+                    window.location.href = '/signup';
+                }
+            }
+
+            async logout() {
+                try {
+                    await fetch('/api/auth/logout', { method: 'POST' });
+                    window.location.href = '/';
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
+            }
+
+            showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(errorDiv);
+                }, 5000);
+            }
+
+            showSuccess(message) {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                successDiv.textContent = message;
+                document.body.appendChild(successDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(successDiv);
+                }, 3000);
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ExpensesManager();
+        });
+    </script>
+</body>
+</html>

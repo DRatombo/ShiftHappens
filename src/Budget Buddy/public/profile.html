@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Budget Buddy</title>
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen navbar-fixed">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-brand">
+                <div class="text-2xl">💰</div>
+                Budget Buddy
+            </a>
+            <div class="navbar-nav">
+                <a href="/dashboard" class="navbar-link">Dashboard</a>
+                <a href="/income" class="navbar-link">Income</a>
+                <a href="/savings-goals" class="navbar-link">Savings Goals</a>
+                <a href="/expenses" class="navbar-link">Expenses</a>
+                <a href="/rewards-center" class="navbar-link">Rewards</a>
+                <a href="/profile" class="navbar-link active">Profile</a>
+                <button id="logoutBtn" class="navbar-link">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b border-gray-200" style="margin-top: 4rem;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="text-3xl">💰</div>
+                        <h1 class="text-2xl font-bold text-gradient">Budget Buddy</h1>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userName" class="text-gray-600"></span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-16">
+        <div class="card">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">👤</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">User Profile</h2>
+                <p class="text-lg text-gray-600">Manage your account settings and preferences</p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- User Information -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Account Information</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <div class="text-lg font-semibold text-gray-800" id="profileName">Loading...</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <div class="text-lg font-semibold text-gray-800" id="profileEmail">Loading...</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Member Since</label>
+                            <div class="text-lg font-semibold text-gray-800" id="profileDate">Loading...</div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Account Status</label>
+                            <div class="text-lg font-semibold text-green-600">Active</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Summary -->
+                <div class="bg-primary-50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Budget Summary</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary-600" id="totalBudgets">0</div>
+                            <div class="text-sm text-gray-600">Total Budgets</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-accent-500" id="totalXP">0</div>
+                            <div class="text-sm text-gray-600">XP Points</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-600" id="totalVouchers">0</div>
+                            <div class="text-sm text-gray-600">Vouchers Earned</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <a href="/income" class="btn-primary text-center">Update Income</a>
+                        <a href="/savings-goals" class="btn-secondary text-center">Modify Goals</a>
+                        <a href="/expenses" class="btn-primary text-center">Edit Expenses</a>
+                        <a href="/rewards-center" class="btn-secondary text-center">View Rewards</a>
+                    </div>
+                </div>
+
+                <!-- Account Actions -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-800 mb-4">Account Actions</h3>
+                    <div class="space-y-4">
+                        <button id="exportData" class="btn-secondary w-full">Export Budget Data</button>
+                        <button id="deleteAccount" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full">
+                            Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        class ProfileManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.checkAuthStatus();
+                this.loadProfileData();
+            }
+
+            setupEventListeners() {
+                // Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+                
+                // Account actions
+                document.getElementById('exportData').addEventListener('click', () => this.exportData());
+                document.getElementById('deleteAccount').addEventListener('click', () => this.deleteAccount());
+            }
+
+            async checkAuthStatus() {
+                try {
+                    const response = await fetch('/api/auth/me');
+                    const data = await response.json();
+                    
+                    if (data.user) {
+                        document.getElementById('userName').textContent = `Welcome, ${data.user.name}`;
+                        document.getElementById('profileName').textContent = data.user.name;
+                        document.getElementById('profileEmail').textContent = data.user.email;
+                        document.getElementById('profileDate').textContent = new Date(data.user.createdAt).toLocaleDateString();
+                    } else {
+                        window.location.href = '/signup';
+                    }
+                } catch (error) {
+                    console.error('Error checking auth status:', error);
+                    window.location.href = '/signup';
+                }
+            }
+
+            async loadProfileData() {
+                try {
+                    const response = await fetch('/api/budget');
+                    const data = await response.json();
+                    
+                    if (data.budgets) {
+                        document.getElementById('totalBudgets').textContent = data.budgets.length;
+                    }
+                    
+                    if (data.totalXP) {
+                        document.getElementById('totalXP').textContent = data.totalXP;
+                        document.getElementById('totalVouchers').textContent = Math.floor(data.totalXP / 20);
+                    }
+                } catch (error) {
+                    console.error('Error loading profile data:', error);
+                }
+            }
+
+            exportData() {
+                // Simple data export functionality
+                const data = {
+                    timestamp: new Date().toISOString(),
+                    message: "Budget data export functionality would be implemented here"
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'budget-data.json';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                this.showSuccess('Budget data exported successfully!');
+            }
+
+            deleteAccount() {
+                if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                    if (confirm('This will permanently delete all your budget data. Are you absolutely sure?')) {
+                        this.showError('Account deletion functionality would be implemented here');
+                    }
+                }
+            }
+
+            async logout() {
+                try {
+                    await fetch('/api/auth/logout', { method: 'POST' });
+                    window.location.href = '/';
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
+            }
+
+            showSuccess(message) {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                successDiv.textContent = message;
+                document.body.appendChild(successDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(successDiv);
+                }, 3000);
+            }
+
+            showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(errorDiv);
+                }, 5000);
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProfileManager();
+        });
+    </script>
+</body>
+</html>
