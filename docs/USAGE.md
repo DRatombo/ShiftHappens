@@ -61,6 +61,5 @@ Check out the Demos:
 
 ## 📌 Notes
 ``` c
-// TODO: Add any special instructions, caveats, or tips
-// for using your project.
+To view the powerpoint presentation please go to git hub (browser) and select the option "View Raw". This will automatically download the presentation for viewing 
 ```
