@@ -5,6 +5,7 @@
 ## ▶️ Running the Application
 ``` c
 Prerequisites and installation steps
+Install Node.js and Tailwind
 Multiple ways to start the server (npm start, npm run dev, deployment scripts)
 Clear access instructions (http://localhost:3000)
 ```
@@ -57,6 +58,7 @@ Mobile Support - Touch-friendly interface guidance
 Check out the Demos: 
 - [Demo Video](../demo/demo.mp4)
 - [Demo Presentation](../demo/demo.pptx)
+
 ## 📌 Notes
 ``` c
 // TODO: Add any special instructions, caveats, or tips
