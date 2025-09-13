@@ -4,20 +4,16 @@
 
 ## 🎯 Project Name
 ``` c
-// TODO: Enter your project name here
 Budget Buddy
 ```
 
 ## 🚀 Summary
 ``` c
-// TODO: Write a short, high-level description of your
-// project (2–3 sentences).
 Budget Buddy is a web application designed to help students track their finances by managing income, setting savings goals, and categorizing expenses. Through gamification, the app rewards users with XP for sticking to their budgets and penalizes overspending, making budgeting an engaging and educational experience.
 ```
 
 ## ✨ Key Features
 ``` c
-// TODO: List key features.
 Income Management: Users specify their income sources after signing up to understand their financial capacity.
 
 Savings Goals: Users can set savings goals (3, 6, 9, or 12 months), and track progress through a color-changing bar as they save.
@@ -33,13 +29,11 @@ Budget Assistance: The app provides users with an assisted budgeting option to g
 
 ## 💡 Inspiration
 ``` c
-// TODO: Briefly explain the motivation behind your project.
 Many students struggle silently with managing their limited finances, often feeling stressed or overwhelmed by daily expenses, bursaries, or part-time job income. Budget Buddy was created to empower students to take control of their financial lives, turning budgeting from a tedious task into an engaging, rewarding experience. By using gamification, personalized feedback, and progress tracking, the app motivates students to build healthy financial habits, achieve their savings goals, and gain confidence in their financial decisions—helping them feel in control and less anxious about money.
 ```
 
 ## 📌 Future Improvements
 ``` c
-// TODO: Mention ideas or features you’d add if given more time.
 Expense Prediction and Alerts: Automatically predict and alert users about upcoming bills, subscriptions, or recurring expenses to avoid budget surprises.
 
 Bank Integration: Allow users to sync their bank accounts to automatically track and categorize their expenses and income.
