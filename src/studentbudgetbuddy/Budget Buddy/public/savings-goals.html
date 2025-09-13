@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goals - Budget Buddy</title>
+    <link href="./styles.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <a href="/" class="flex items-center space-x-3">
+                        <div class="text-3xl">💰</div>
+                        <h1 class="text-2xl font-bold text-gradient">Budget Buddy</h1>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userName" class="text-gray-600"></span>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-primary-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="step-indicator completed">1</div>
+                <div class="flex-1 h-1 bg-green-500 mx-2"></div>
+                <div class="step-indicator active">2</div>
+                <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                <div class="step-indicator pending">3</div>
+                <div class="flex-1 h-1 bg-gray-200 mx-2"></div>
+                <div class="step-indicator pending">4</div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span class="font-medium text-green-600">Income</span>
+                <span class="font-medium">Savings Goals</span>
+                <span>Expenses</span>
+                <span>Dashboard</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-16">
+        <div class="card">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">🎯</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Set Your Savings Goals</h2>
+                <p class="text-lg text-gray-600">
+                    Next, let's set a savings goal! You can choose how long you'd like to save for—whether it's 3 months, 6 months, 9 months, or 12 months. 
+                    This will help us track your progress towards your savings target.
+                </p>
+            </div>
+
+            <form id="savingsForm" class="space-y-8">
+                <!-- Goal Duration Selection -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Choose Your Savings Goal Duration</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <label class="goal-option" data-months="3">
+                            <input type="radio" name="savingsGoal" value="3" class="hidden">
+                            <div class="goal-card">
+                                <div class="text-3xl mb-2">🏃‍♂️</div>
+                                <h4 class="text-lg font-semibold">3 Months</h4>
+                                <p class="text-sm text-gray-600">Quick Goal</p>
+                                <div class="mt-2 text-primary-600 font-semibold" id="goal3-amount">R 0</div>
+                            </div>
+                        </label>
+
+                        <label class="goal-option" data-months="6">
+                            <input type="radio" name="savingsGoal" value="6" class="hidden">
+                            <div class="goal-card">
+                                <div class="text-3xl mb-2">🚀</div>
+                                <h4 class="text-lg font-semibold">6 Months</h4>
+                                <p class="text-sm text-gray-600">Medium Goal</p>
+                                <div class="mt-2 text-primary-600 font-semibold" id="goal6-amount">R 0</div>
+                            </div>
+                        </label>
+
+                        <label class="goal-option" data-months="9">
+                            <input type="radio" name="savingsGoal" value="9" class="hidden">
+                            <div class="goal-card">
+                                <div class="text-3xl mb-2">💪</div>
+                                <h4 class="text-lg font-semibold">9 Months</h4>
+                                <p class="text-sm text-gray-600">Long Goal</p>
+                                <div class="mt-2 text-primary-600 font-semibold" id="goal9-amount">R 0</div>
+                            </div>
+                        </label>
+
+                        <label class="goal-option" data-months="12">
+                            <input type="radio" name="savingsGoal" value="12" class="hidden">
+                            <div class="goal-card">
+                                <div class="text-3xl mb-2">🏆</div>
+                                <h4 class="text-lg font-semibold">12 Months</h4>
+                                <p class="text-sm text-gray-600">Annual Goal</p>
+                                <div class="mt-2 text-primary-600 font-semibold" id="goal12-amount">R 0</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Custom Goal Amount -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Or Set a Custom Goal Amount</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="customAmount" class="block text-sm font-medium text-gray-700 mb-2">Target Amount (ZAR)</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R</span>
+                                <input type="number" id="customAmount" name="customAmount" 
+                                       class="input-field pl-8" placeholder="0" min="0" step="100">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="customMonths" class="block text-sm font-medium text-gray-700 mb-2">Target Duration (Months)</label>
+                            <input type="number" id="customMonths" name="customMonths" 
+                                   class="input-field" placeholder="12" min="1" max="60">
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="text-sm text-gray-600">Monthly savings needed:</div>
+                        <div class="text-2xl font-bold text-primary-600" id="customMonthly">R 0</div>
+                    </div>
+                </div>
+
+                <!-- Goal Summary -->
+                <div class="bg-primary-50 rounded-lg p-6" id="goalSummary" style="display: none;">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Your Savings Goal Summary</h3>
+                    <div class="grid md:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-sm text-gray-600">Goal Duration</div>
+                            <div class="text-xl font-bold text-gray-800" id="summaryDuration">0 months</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Target Amount</div>
+                            <div class="text-xl font-bold text-primary-600" id="summaryAmount">R 0</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600">Monthly Savings</div>
+                            <div class="text-xl font-bold text-green-600" id="summaryMonthly">R 0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goal Categories -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">What are you saving for?</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="goalCategory" value="emergency" class="mr-3">
+                            <div>
+                                <div class="font-medium">Emergency Fund</div>
+                                <div class="text-sm text-gray-500">Unexpected expenses</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="goalCategory" value="vacation" class="mr-3">
+                            <div>
+                                <div class="font-medium">Vacation</div>
+                                <div class="text-sm text-gray-500">Travel and leisure</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="goalCategory" value="education" class="mr-3">
+                            <div>
+                                <div class="font-medium">Education</div>
+                                <div class="text-sm text-gray-500">Courses or training</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="goalCategory" value="home" class="mr-3">
+                            <div>
+                                <div class="font-medium">Home</div>
+                                <div class="text-sm text-gray-500">Down payment or renovation</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="goalCategory" value="vehicle" class="mr-3">
+                            <div>
+                                <div class="font-medium">Vehicle</div>
+                                <div class="text-sm text-gray-500">Car or motorcycle</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="goalCategory" value="other" class="mr-3">
+                            <div>
+                                <div class="font-medium">Other</div>
+                                <div class="text-sm text-gray-500">Custom goal</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <a href="/income" class="btn-secondary">← Back to Income</a>
+                    <button type="submit" class="btn-primary">
+                        Continue to Expenses →
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <style>
+        .goal-option {
+            cursor: pointer;
+        }
+        
+        .goal-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+            background: white;
+        }
+        
+        .goal-option:hover .goal-card {
+            border-color: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .goal-option input:checked + .goal-card {
+            border-color: #5a67d8;
+            background-color: #f0f4ff;
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+        }
+    </style>
+
+    <script>
+        class SavingsGoalsManager {
+            constructor() {
+                this.incomeData = null;
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.checkAuthStatus();
+                this.loadIncomeData();
+            }
+
+            setupEventListeners() {
+                // Form submission
+                document.getElementById('savingsForm').addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Goal selection
+                document.querySelectorAll('input[name="savingsGoal"]').forEach(input => {
+                    input.addEventListener('change', () => this.updateGoalSummary());
+                });
+                
+                // Custom amount inputs
+                document.getElementById('customAmount').addEventListener('input', () => this.updateCustomMonthly());
+                document.getElementById('customMonths').addEventListener('input', () => this.updateCustomMonthly());
+                
+                // Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+            }
+
+            loadIncomeData() {
+                const incomeData = sessionStorage.getItem('incomeData');
+                if (incomeData) {
+                    this.incomeData = JSON.parse(incomeData);
+                    this.updateGoalAmounts();
+                } else {
+                    // Redirect to income page if no data
+                    window.location.href = '/income';
+                }
+            }
+
+            updateGoalAmounts() {
+                if (!this.incomeData) return;
+                
+                const totalIncome = this.incomeData.primaryIncome + this.incomeData.secondaryIncome + this.incomeData.otherIncome;
+                
+                // Calculate suggested savings amounts (20% of income for different durations)
+                const suggestedSavings = totalIncome * 0.2;
+                
+                document.getElementById('goal3-amount').textContent = `R ${(suggestedSavings * 3).toLocaleString()}`;
+                document.getElementById('goal6-amount').textContent = `R ${(suggestedSavings * 6).toLocaleString()}`;
+                document.getElementById('goal9-amount').textContent = `R ${(suggestedSavings * 9).toLocaleString()}`;
+                document.getElementById('goal12-amount').textContent = `R ${(suggestedSavings * 12).toLocaleString()}`;
+            }
+
+            updateCustomMonthly() {
+                const amount = parseFloat(document.getElementById('customAmount').value) || 0;
+                const months = parseFloat(document.getElementById('customMonths').value) || 1;
+                
+                const monthly = amount / months;
+                document.getElementById('customMonthly').textContent = `R ${monthly.toLocaleString()}`;
+            }
+
+            updateGoalSummary() {
+                const selectedGoal = document.querySelector('input[name="savingsGoal"]:checked');
+                const customAmount = parseFloat(document.getElementById('customAmount').value) || 0;
+                const customMonths = parseFloat(document.getElementById('customMonths').value) || 0;
+                
+                let duration, amount, monthly;
+                
+                if (selectedGoal) {
+                    duration = parseInt(selectedGoal.value);
+                    const totalIncome = this.incomeData.primaryIncome + this.incomeData.secondaryIncome + this.incomeData.otherIncome;
+                    amount = totalIncome * 0.2 * duration;
+                    monthly = amount / duration;
+                } else if (customAmount > 0 && customMonths > 0) {
+                    duration = customMonths;
+                    amount = customAmount;
+                    monthly = amount / duration;
+                } else {
+                    document.getElementById('goalSummary').style.display = 'none';
+                    return;
+                }
+                
+                document.getElementById('summaryDuration').textContent = `${duration} months`;
+                document.getElementById('summaryAmount').textContent = `R ${amount.toLocaleString()}`;
+                document.getElementById('summaryMonthly').textContent = `R ${monthly.toLocaleString()}`;
+                document.getElementById('goalSummary').style.display = 'block';
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const selectedGoal = formData.get('savingsGoal');
+                const customAmount = parseFloat(formData.get('customAmount')) || 0;
+                const customMonths = parseFloat(formData.get('customMonths')) || 0;
+                const goalCategory = formData.get('goalCategory');
+                
+                if (!selectedGoal && (customAmount <= 0 || customMonths <= 0)) {
+                    this.showError('Please select a savings goal or enter custom values');
+                    return;
+                }
+                
+                if (!goalCategory) {
+                    this.showError('Please select what you are saving for');
+                    return;
+                }
+                
+                let savingsData;
+                
+                if (selectedGoal) {
+                    const duration = parseInt(selectedGoal);
+                    const totalIncome = this.incomeData.primaryIncome + this.incomeData.secondaryIncome + this.incomeData.otherIncome;
+                    const amount = totalIncome * 0.2 * duration;
+                    
+                    savingsData = {
+                        duration: duration,
+                        targetAmount: amount,
+                        monthlySavings: amount / duration,
+                        category: goalCategory,
+                        isCustom: false
+                    };
+                } else {
+                    savingsData = {
+                        duration: customMonths,
+                        targetAmount: customAmount,
+                        monthlySavings: customAmount / customMonths,
+                        category: goalCategory,
+                        isCustom: true
+                    };
+                }
+                
+                try {
+                    // Store savings data
+                    sessionStorage.setItem('savingsData', JSON.stringify(savingsData));
+                    
+                    // Redirect to expenses page
+                    window.location.href = '/expenses';
+                } catch (error) {
+                    console.error('Error saving savings data:', error);
+                    this.showError('Failed to save savings data. Please try again.');
+                }
+            }
+
+            async checkAuthStatus() {
+                try {
+                    const response = await fetch('/api/auth/me');
+                    const data = await response.json();
+                    
+                    if (data.user) {
+                        document.getElementById('userName').textContent = `Welcome, ${data.user.name}`;
+                    } else {
+                        window.location.href = '/signup';
+                    }
+                } catch (error) {
+                    console.error('Error checking auth status:', error);
+                    window.location.href = '/signup';
+                }
+            }
+
+            async logout() {
+                try {
+                    await fetch('/api/auth/logout', { method: 'POST' });
+                    window.location.href = '/';
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
+            }
+
+            showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                
+                setTimeout(() => {
+                    document.body.removeChild(errorDiv);
+                }, 5000);
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SavingsGoalsManager();
+        });
+    </script>
+</body>
+</html>
