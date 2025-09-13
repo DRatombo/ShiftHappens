@@ -5,7 +5,10 @@
 # Setup Instructions
 
 Follow the steps below to set up and run the project. (Example)
-
+Prerequisites and installation steps
+Install Node.js and Tailwind
+Multiple ways to start the server (npm start, npm run dev, deployment scripts)
+Clear access instructions (http://localhost:3000)
 ---
 
 ## 📦 Requirements
