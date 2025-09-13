@@ -14,7 +14,7 @@
 |----------|---------------------|-----------------------| -------------------|-------------|
 | **Duduzile Ratombo**   | Backend Developer   | University of KwaZulu Natal | duduzile.rt | <ratombodm@gmail.com> |
 | **Name 2**   | Frontend Developer  | University of the Witwatersrand | name2 | <email2@gmail.com> |
-| **Simbonge Mnyandu**   |Data Scientist| University of Kwa-Zulu Natal | name3 | <email3@gmail.com> |
+| **Simbonge Mnyandu**   |Team Player| University of Kwa-Zulu Natal | gcino_67108 | <simbongemn@gmail.com> |
 | **Name 4**   | Q.A Tester          | University of the Western Cape | name4 | <email4@gmail.com> |
 
 ## 🏫 Institution
