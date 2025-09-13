@@ -12,17 +12,27 @@
 ## 👥 Members
 | Name     | Role                | Institution           | Discord Handle | Email |
 |----------|---------------------|-----------------------| -------------------|-------------|
-| **Duduzile Ratombo**   | Backend Developer   | University of KwaZulu Natal | duduzile.rt | <ratombodm@gmail.com> |
-| **Name 2**   | Frontend Developer  | University of the Witwatersrand | name2 | <email2@gmail.com> |
-| **Simbonge Mnyandu**   |Data Scientist| University of Kwa-Zulu Natal | name3 | <email3@gmail.com> |
-| **Name 4**   | Q.A Tester          | University of the Western Cape | name4 | <email4@gmail.com> |
+| **Duduzile Ratombo**   | Team Player | University of KwaZulu-Natal | duduzile.rt | <ratombodm@gmail.com> |
+| **Liso Fikeni**   | Frontend Developer  | University of KwaZulu-Natal | SasolOnIce | <liso-solethu@outlook.com> |
+| **Simbonge Mnyandu**   |Data Scientist| University of KwaZulu-Natal | name3 | <email3@gmail.com> |
+
+Team Player: The member helps where they can therefore we have each contributed to every field. 
 
 ## 🏫 Institution
 ``` c
 // TODO: Fill-in the name of the institution your
 // team is competing under.
+University Of KwaZulu-Natal
 ```
 
 ## 📧 Other Contact Info
-- GitHub Repo: <https://github.com/user-name/repo-name>
+- GitHub Repo: <https://github.com/DRatombo/ShiftHappens.git>
 - Other Info (if available): LinkedIn, Website, etc.
+Duduzile Ratombo 
+    LinkedIn: Duduzile Ratombo
+
+Simbonge Mnyandu
+    LinkedIn: Simbonge Mnyandu
+
+Liso Fikeni 
+    LinkedIn: Liso Fikeni
