@@ -6,7 +6,7 @@
 
 ## ⚒️ Team Name
 ``` c
-// TODO: Fill-in the name of your team.
+ShiftHappens
 ```
 
 ## 👥 Members
@@ -20,8 +20,7 @@ Team Player: The member helps where they can therefore we have each contributed 
 
 ## 🏫 Institution
 ``` c
-// TODO: Fill-in the name of the institution your
-// team is competing under.
+
 University Of KwaZulu-Natal
 ```
 
