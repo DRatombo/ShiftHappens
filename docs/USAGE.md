@@ -56,8 +56,8 @@ Mobile Support - Touch-friendly interface guidance
 // TODO: Link your demo video and PowerPoint here
 ```
 Check out the Demos: 
-- [Demo Video](../demo/demo.mp4)
-- [Demo Presentation](../demo/demo.pptx)
+- [Demo Video](../demo/2025%20Shift%20Happens%20Demo%20Video.mp4)
+- [Demo Presentation](../demo/Shift%20Happens%20Student%20Budget%20Buddy%20Presentation.pptx)
 
 ## 📌 Notes
 ``` c
